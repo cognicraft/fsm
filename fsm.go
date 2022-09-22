@@ -99,14 +99,18 @@ func (sm *StateMachine) SetOnEntry(state State, action Action) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	s := sm.getOrCreateState(state)
-	s.onEntry = action
+	if action != nil {
+		s.onEntry = action
+	}
 }
 
 func (sm *StateMachine) SetOnExit(state State, action Action) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	s := sm.getOrCreateState(state)
-	s.onExit = action
+	if action != nil {
+		s.onExit = action
+	}
 }
 
 func (sm *StateMachine) ValidEvents(state State) []Event {

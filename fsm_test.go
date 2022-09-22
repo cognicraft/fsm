@@ -11,8 +11,8 @@ func TestFSM(t *testing.T) {
 	sm.AddTransition("idle", "PLAY", "playing")
 	sm.AddTransition("playing", "STOP", "idle")
 
-	sm.SetOnEntry("idle", func() { t.Logf("entered idle") })
-	sm.SetOnExit("idle", func() { t.Logf("left idle") })
+	sm.SetOnEntry("idle", nil)
+	sm.SetOnExit("idle", nil)
 
 	sm.SetOnEntry("playing", func() { t.Logf("entered playing") })
 	sm.SetOnExit("playing", func() { t.Logf("left playing") })
