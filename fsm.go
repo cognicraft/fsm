@@ -99,7 +99,9 @@ func (sm *StateMachine) SetOnEntry(state State, action Action) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	s := sm.getOrCreateState(state)
-	if action != nil {
+	if action == nil {
+		s.onEntry = NOOP
+	} else {
 		s.onEntry = action
 	}
 }
@@ -108,7 +110,9 @@ func (sm *StateMachine) SetOnExit(state State, action Action) {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 	s := sm.getOrCreateState(state)
-	if action != nil {
+	if action == nil {
+		s.onEntry = NOOP
+	} else {
 		s.onExit = action
 	}
 }
